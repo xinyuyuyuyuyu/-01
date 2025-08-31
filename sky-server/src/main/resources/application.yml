@@ -34,6 +34,6 @@ sky:
 
     admin-secret-key: itcast
 
-    admin-ttl: 7200000
+    admin-ttl: 72000000000
 
     admin-token-name: token
