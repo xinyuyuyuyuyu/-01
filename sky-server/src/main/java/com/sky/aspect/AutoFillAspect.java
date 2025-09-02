@@ -23,6 +23,13 @@ public class AutoFillAspect {
     public void autoFillPointcut() {
 
     }
+    /*
+    *  所以既可以在其他方法的参数中直接写函数式接口并写其中的逻辑
+    * 也可以在函数式接口中直接写其他方法作为他的逻辑
+    * 例如：
+    *  Consumer<String> consumer = str -> System.out.println(str);
+    *  consumer.accept("hello");
+    * * */
 
     @Before("autoFillPointcut()")
     public void autoFill(JoinPoint joinPoint){
