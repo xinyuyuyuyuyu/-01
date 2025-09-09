@@ -14,3 +14,9 @@ public class SkyApplication {
         log.info("server started");
     }
 }
+
+/*
+	wx2441b37815f13295
+    * fbf70a3410a7ebd8e7340d5b2f1c5975
+    authorization_code
+* */

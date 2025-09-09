@@ -35,6 +35,13 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private SetmealMapper setmealMapper;
 
+    /*
+    * 如果我只写 private CategoryMapper categoryMapper;不用@autowired也不用
+    * public categoryserviceimpl( Category category)
+    * {this.category = category;}
+    * 呢
+    * */
+
     /**
      * 新增分类
      * @param categoryDTO

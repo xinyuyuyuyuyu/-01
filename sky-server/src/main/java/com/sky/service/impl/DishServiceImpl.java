@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -88,6 +89,66 @@ public class DishServiceImpl implements DishService {
             dishFlavorMapper.deleteByDishId(id);
         }
 
+    }
+
+    public DishVO getByIdWithFlavor(Long id) {
+        log.info("根据id查询菜品和口味：{}",id);
+        Dish dish = dishMapper.getById(id);
+        DishVO dishVO = new DishVO();
+        BeanUtils.copyProperties(dish , dishVO);
+        List<DishFlavor> list = dishFlavorMapper.getByDishId(id);
+        dishVO.setFlavors(list);
+        return dishVO;
+    }
+
+    public void updateWithFlavor(DishDTO dishDTO){
+        log.info("交给Service的修改菜品信息为:{}",dishDTO);
+        Dish dish = new Dish();
+        BeanUtils.copyProperties(dishDTO,dish);
+
+        dishMapper.update(dish);
+
+        List<DishFlavor> dishFlavor = dishDTO.getFlavors();
+       /* if(dishFlavor != null && dishFlavor.size() > 0){
+            dishFlavor.forEach(flavor -> {
+                    dishFlavorMapper.update(flavor);
+                    }
+                    );
+
+        }*/
+
+        dishFlavorMapper.deleteByDishId(dishDTO.getId());
+        if(dishFlavor != null && dishFlavor.size() > 0){
+            dishFlavor.forEach(flavor -> {
+                    flavor.setDishId(dishDTO.getId());
+                    }
+                    );
+            dishFlavorMapper.insertBatch(dishFlavor);
+        }
+
+
+
+
+
+    }
+
+    public List<DishVO> listWithFlavor(Dish dish) {
+        List<Dish> dishList = dishMapper.list(dish);
+
+        List<DishVO> dishVOList = new ArrayList<>();
+
+        for (Dish d : dishList) {
+            DishVO dishVO = new DishVO();
+            BeanUtils.copyProperties(d,dishVO);
+
+            //根据菜品id查询对应的口味
+            List<DishFlavor> flavors = dishFlavorMapper.getByDishId(d.getId());
+
+            dishVO.setFlavors(flavors);
+            dishVOList.add(dishVO);
+        }
+
+        return dishVOList;
     }
 
 

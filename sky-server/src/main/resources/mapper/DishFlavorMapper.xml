@@ -10,4 +10,28 @@
             (#{flavor.dishId}, #{flavor.name}, #{flavor.value})
         </foreach>
     </insert>
+
+    <select id="getByDishId" resultType="com.sky.entity.DishFlavor">
+        select * from dish_flavor where dish_id = #{dishId}
+    </select>
+
+    <update id="update">
+
+        update dish_flavor
+
+
+            <set>
+                name = #{flavor.name},
+                value = #{flavor.value},
+            <if test="dishId != null">
+            dish_id = #{flavor.dishId}
+            </if>
+
+            </set>
+        where id = #{flavor.id}
+
+
+    </update>
+
+
 </mapper>
