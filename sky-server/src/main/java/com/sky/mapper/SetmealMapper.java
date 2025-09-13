@@ -34,4 +34,8 @@ public interface SetmealMapper {
             "where sd.setmeal_id = #{setmealId}")
     List<DishItemVO> getDishItemBySetmealId(Long setmealId);
 
+
+    @Select("select * from setmeal where id = #{setmealId}")
+    Setmeal getById(Long setmealId);
+
 }
