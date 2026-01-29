@@ -14,7 +14,8 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddressBook implements Serializable {
+public class
+AddressBook implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
